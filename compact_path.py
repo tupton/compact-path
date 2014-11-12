@@ -10,10 +10,11 @@ def compact_path(path, trigger=0):
     if not path or len(path) == 0:
         return
 
-    if len(path) <= trigger:
+    if len(path) <= trigger or path == os.sep:
         return path
 
     parts = path.split(os.sep)
+    parts = [parts[0]] + filter(None, parts[1:])
     compacted_parts = []
     for i, p in enumerate(parts):
         if i != len(parts) - 1:
@@ -21,10 +22,7 @@ def compact_path(path, trigger=0):
         else:
             compacted_parts.append(p)
 
-    compacted = os.path.join(*compacted_parts)
-
-    if path[0] == os.sep:
-        compacted = os.sep + compacted
+    compacted = os.sep.join(compacted_parts)
 
     return compacted
 

@@ -7,6 +7,9 @@ def test_empty():
 
     tools.eq_(None, compact_path(None))
 
+def test_root():
+    tools.eq_('/', compact_path('/'))
+
 def test_absolute():
     tools.eq_('/usr', compact_path('/usr'))
 
@@ -31,3 +34,6 @@ def test_max_length():
     tools.eq_(path, compact_path(path, len(path)))
 
     tools.eq_('/u/l/bin', compact_path(path, trigger=1))
+
+def test_trailing_slash():
+    tools.eq_('/u/l/bin', compact_path('/usr/local/bin/'))
