@@ -25,3 +25,9 @@ def test_home():
     tools.eq_("~/code", compact_path("~/code"))
 
     tools.eq_("~/c/compact_path", compact_path("~/code/compact_path"))
+
+def test_max_length():
+    path = "/usr/local/bin"
+    tools.eq_(path, compact_path(path, len(path)))
+
+    tools.eq_('/u/l/bin', compact_path(path, trigger=1))
