@@ -37,3 +37,10 @@ def test_max_length():
 
 def test_trailing_slash():
     tools.eq_('/u/l/bin', compact_path('/usr/local/bin/'))
+
+def test_spaces():
+    tools.eq_("/u/l/b in", compact_path("/usr/lo cal/b in"))
+
+    tools.eq_("/u/l/b in", compact_path("/usr/ lo cal/b in"))
+
+    tools.eq_("/u/l/ bin", compact_path("/usr/ lo cal/ bin"))

@@ -18,6 +18,7 @@ def compact_path(path, trigger=0):
     compacted_parts = []
     for i, p in enumerate(parts):
         if i != len(parts) - 1:
+            p = p.strip()
             compacted_parts.append(p[0] if len(p) > 0 else '')
         else:
             compacted_parts.append(p)
