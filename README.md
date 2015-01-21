@@ -48,5 +48,5 @@ In `zsh`, that would result in a prompt that looks like the following.
 
 See my `zshrc` for the actual [`compact_path` function][cp] and how I use it [in my prompt][p].
 
-  [cp]: https://github.com/tupton/dotfiles/blob/master/zshrc#L137-L144
-  [p]: https://github.com/tupton/dotfiles/blob/master/zshrc#L211-L212
+  [cp]: https://github.com/tupton/dotfiles/blob/ed9a4dd167e9ddfad4a0388c3c9120efcb3926d5/zshrc#L144-L151
+  [p]: https://github.com/tupton/dotfiles/blob/ed9a4dd167e9ddfad4a0388c3c9120efcb3926d5/zshrc#L218-L219
