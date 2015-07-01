@@ -1,10 +1,25 @@
 #! /usr/bin/env python
 
+"""
+Print a compacted version of the given path.
+
+Usage:
+    compact_path.py PATH [TRIGGER]
+    compact_path.py (-h | --help)
+    compact_path.py --version
+
+Long elements in a path are compacted to one letter. Optionally, path compaction can take place only
+when the path exceeds a given trigger length.
+
+    PATH     The path to compact
+    TRIGGER  The path length at which path compaction takes place [default: 0]
+"""
+
 from __future__ import print_function
 
 import os
-import sys
-import argparse
+
+from docopt import docopt
 
 def compact_path(path, trigger=0):
     if not path or len(path) == 0:
@@ -28,11 +43,6 @@ def compact_path(path, trigger=0):
     return compacted
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Compact path elements to one letter")
-    parser.add_argument('path', help='The path to compact')
-    parser.add_argument('trigger', nargs='?', type=int, default=0, help='The limit at which path compaction takes place')
+    args = docopt(__doc__, version="Compact Path 0.1")
 
-    args = parser.parse_args()
-
-    if 1 < len(sys.argv) <= 3:
-        print(compact_path(args.path, trigger=args.trigger))
+    print(compact_path(args['PATH'], trigger=int(args['TRIGGER'])))
