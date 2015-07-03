@@ -4,7 +4,7 @@
 Print a compacted version of the given path.
 
 Usage:
-    compact_path.py PATH [TRIGGER]
+    compact_path.py [--trigger=LENGTH] PATH
     compact_path.py (-h | --help)
     compact_path.py --version
 
@@ -12,7 +12,9 @@ Long elements in a path are compacted to one letter. Optionally, path compaction
 when the path exceeds a given trigger length.
 
     PATH     The path to compact
-    TRIGGER  The path length at which path compaction takes place [default: 0]
+
+Options:
+    -t, --trigger=LENGTH   The path length at which path compaction takes place [default: 0]
 """
 
 from __future__ import print_function
@@ -42,4 +44,4 @@ def compact_path(path, trigger=0):
 if __name__ == "__main__":
     args = docopt(__doc__, version="Compact Path 0.1")
 
-    print(compact_path(args['PATH'], trigger=int(args['TRIGGER'])))
+    print(compact_path(args['PATH'], trigger=int(args['--trigger'])))
