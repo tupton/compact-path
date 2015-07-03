@@ -22,10 +22,7 @@ import os
 from docopt import docopt
 
 def compact_path(path, trigger=0):
-    if not path or len(path) == 0:
-        return
-
-    if len(path) <= trigger or path == os.sep:
+    if not path or len(path) == 0 or len(path) <= trigger or path == os.sep:
         return path
 
     parts = path.split(os.sep)

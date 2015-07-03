@@ -3,7 +3,7 @@ from compact_path import compact_path
 import nose.tools as tools
 
 def test_empty():
-    tools.eq_(None, compact_path(''))
+    tools.eq_('', compact_path(''))
 
     tools.eq_(None, compact_path(None))
 
