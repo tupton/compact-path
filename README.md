@@ -11,15 +11,15 @@ Reduce path elements to one character save the last element, like vim buffer nam
 ~/c/compact_path
 ```
 
-Pass an optional second argument as the `trigger` length, or the length at which compaction will
-take place. Any paths that are *less* than this `trigger` length will not be compacted.
+Pass the `--trigger` or `-t` option to specify the length at which compaction will
+take place. Any paths that are *less* than this length will not be compacted.
 
 ``` sh
 ❯ pwd
 /Users/tupton/code/compact_path
-❯ python compact_path.py $(pwd) 35
+❯ python compact_path.py $(pwd) --trigger 35
 /Users/tupton/code/compact_path
-❯ python compact_path.py $(pwd) 10
+❯ python compact_path.py $(pwd) -t 10
 /U/t/c/compact_path
 ```
 
@@ -29,7 +29,7 @@ You can use this in your shell prompt.
 function compact_path() {
     local cp="/usr/local/bin/compact_path"
     if [[ -e "$cp" ]]; then
-        echo $("$cp" "$1" 20)
+        echo $("$cp" "$1" --trigger 20)
     else
         echo "$1"
     fi
@@ -48,5 +48,5 @@ In `zsh`, that would result in a prompt that looks like the following.
 
 See my `zshrc` for the actual [`compact_path` function][cp] and how I use it [in my prompt][p].
 
-  [cp]: https://github.com/tupton/dotfiles/blob/ed9a4dd167e9ddfad4a0388c3c9120efcb3926d5/zshrc#L144-L151
-  [p]: https://github.com/tupton/dotfiles/blob/ed9a4dd167e9ddfad4a0388c3c9120efcb3926d5/zshrc#L218-L219
+  [cp]: https://github.com/tupton/dotfiles/blob/656350a5a060ec5cf162fe02f6c8f3e3cdebf3d4/zsh/zshrc.d/prompt.zsh#L18-L25
+  [p]: https://github.com/tupton/dotfiles/blob/656350a5a060ec5cf162fe02f6c8f3e3cdebf3d4/zsh/zshrc.d/prompt.zsh#L101
