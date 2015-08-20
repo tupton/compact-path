@@ -1,5 +1,7 @@
 # Compact Path
 
+[![Build Status](https://travis-ci.org/tupton/compact-path.svg?branch=master)](https://travis-ci.org/tupton/compact-path)
+
 Reduce path elements to one character save the last element, like vim buffer names.
 
 ``` sh
