@@ -28,7 +28,7 @@ def compact_path(path, trigger=0):
         return path
 
     parts = path.split(os.sep)
-    parts = [parts[0]] + filter(None, parts[1:])
+    parts = [parts[0]] + [_f for _f in parts[1:] if _f]
     compacted_parts = []
     for i, p in enumerate(parts):
         if i != len(parts) - 1:
