@@ -27,16 +27,19 @@ def compact_path(path, trigger=0):
     if not path or len(path) == 0 or len(path) <= trigger or path == os.sep:
         return path
 
-    parts = path.split(os.sep)
-    parts = [parts[0]] + [_f for _f in parts[1:] if _f]
-    compacted_parts = []
-    for i, p in enumerate(parts):
-        if i != len(parts) - 1:
-            p = p.strip()
-            compacted_parts.append(p[0] if len(p) > 0 else '')
-        else:
-            compacted_parts.append(p)
+    # Filter out empty path components
+    parts = filter(bool, path.split(os.sep))
+    # ... but add one to the beginning if we're dealing with an absolute path
+    if path[0] == os.sep:
+        parts.insert(0, '')
 
+    # Use the first character of each nonzero-length path component
+    compacted_parts = [(p.strip()[0] if len(p.strip()) > 0 else '') for p in parts[:-1]]
+    # Add the full "basename" (last part) of the path
+    compacted_parts.append(parts[-1])
+
+    # Join the path back up with the proper separator
+    # This strips trailing slashes from the input path
     compacted = os.sep.join(compacted_parts)
 
     return compacted
