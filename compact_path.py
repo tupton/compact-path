@@ -28,7 +28,7 @@ def compact_path(path, trigger=0):
         return path
 
     # Filter out empty path components
-    parts = filter(bool, path.split(os.sep))
+    parts = list(filter(bool, path.split(os.sep)))
     # ... but add one to the beginning if we're dealing with an absolute path
     if path[0] == os.sep:
         parts.insert(0, '')
