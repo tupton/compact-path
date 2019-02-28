@@ -10,7 +10,7 @@ jobs:
           command: |
             export LOCAL="/home/circleci/.local"
             export PATH="$LOCAL/bin:$PATH"
-            pip install -r test-requirements.txt --user
+            pip install -r requirements.txt --user
       - run:
           name: Test
           command: |
@@ -27,7 +27,7 @@ jobs:
           command: |
             export LOCAL="/home/circleci/.local"
             export PATH="$LOCAL/bin:$PATH"
-            pip install -r test-requirements.txt --user
+            pip install -r requirements.txt --user
       - run:
           name: Test
           command: |
@@ -44,7 +44,7 @@ jobs:
           command: |
             export LOCAL="/home/circleci/.local"
             export PATH="$LOCAL/bin:$PATH"
-            pip install -r test-requirements.txt --user
+            pip install -r requirements.txt --user
       - run:
           name: Test
           command: |
@@ -61,7 +61,7 @@ jobs:
           command: |
             export LOCAL="/home/circleci/.local"
             export PATH="$LOCAL/bin:$PATH"
-            pip install -r test-requirements.txt --user
+            pip install -r requirements.txt --user
       - run:
           name: Test
           command: |
@@ -78,7 +78,7 @@ jobs:
           command: |
             export LOCAL="/home/circleci/.local"
             export PATH="$LOCAL/bin:$PATH"
-            pip install -r test-requirements.txt --user
+            pip install -r requirements.txt --user
       - run:
           name: Test
           command: |
