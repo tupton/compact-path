@@ -1,0 +1,96 @@
+version: 2
+jobs:
+  py27:
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            pip install -r test-requirements.txt --user
+      - run:
+          name: Test
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            nosetests
+  py34:
+    docker:
+      - image: circleci/python:3.4
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            pip install -r test-requirements.txt --user
+      - run:
+          name: Test
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            nosetests
+  py35:
+    docker:
+      - image: circleci/python:3.5
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            pip install -r test-requirements.txt --user
+      - run:
+          name: Test
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            nosetests
+  py36:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            pip install -r test-requirements.txt --user
+      - run:
+          name: Test
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            nosetests
+  py37:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            pip install -r test-requirements.txt --user
+      - run:
+          name: Test
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            nosetests
+workflows:
+  version: 2
+  build_multiple_python:
+    jobs:
+      - py27
+      - py34
+      - py35
+      - py36
+      - py37
