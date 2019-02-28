@@ -22,27 +22,27 @@ jobs:
     docker:
       - image: circleci/python:2.7
     steps:
-      - installandtest
+      - installandtest:
   py34:
     docker:
       - image: circleci/python:3.4
     steps:
-      - installandtest
+      - installandtest:
   py35:
     docker:
       - image: circleci/python:3.5
     steps:
-      - installandtest
+      - installandtest:
   py36:
     docker:
       - image: circleci/python:3.6
     steps:
-      - installandtest
+      - installandtest:
   py37:
     docker:
       - image: circleci/python:3.7
     steps:
-      - installandtest
+      - installandtest:
 workflows:
   version: 2
   build_multiple_python:
