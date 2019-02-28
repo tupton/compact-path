@@ -1,90 +1,48 @@
 version: 2
+commands:
+  installandtest:
+    description: Install requirements and run nosetests
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            pip install -r requirements.txt --user
+      - run:
+          name: Test
+          command: |
+            export LOCAL="/home/circleci/.local"
+            export PATH="$LOCAL/bin:$PATH"
+            python --version
+            nosetests
 jobs:
   py27:
     docker:
       - image: circleci/python:2.7
     steps:
-      - checkout
-      - run:
-          name: Install requirements
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            pip install -r requirements.txt --user
-      - run:
-          name: Test
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            nosetests
+      - installandtest
   py34:
     docker:
       - image: circleci/python:3.4
     steps:
-      - checkout
-      - run:
-          name: Install requirements
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            pip install -r requirements.txt --user
-      - run:
-          name: Test
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            nosetests
+      - installandtest
   py35:
     docker:
       - image: circleci/python:3.5
     steps:
-      - checkout
-      - run:
-          name: Install requirements
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            pip install -r requirements.txt --user
-      - run:
-          name: Test
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            nosetests
+      - installandtest
   py36:
     docker:
       - image: circleci/python:3.6
     steps:
-      - checkout
-      - run:
-          name: Install requirements
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            pip install -r requirements.txt --user
-      - run:
-          name: Test
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            nosetests
+      - installandtest
   py37:
     docker:
       - image: circleci/python:3.7
     steps:
-      - checkout
-      - run:
-          name: Install requirements
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            pip install -r requirements.txt --user
-      - run:
-          name: Test
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            nosetests
+      - installandtest
 workflows:
   version: 2
   build_multiple_python:
