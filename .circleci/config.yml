@@ -1,48 +1,41 @@
 version: 2.1
-commands:
-  installandtest:
-    description: Install requirements and run nosetests
-    steps:
-      - checkout
-      - run:
-          name: Install requirements
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            pip install -r requirements.txt --user
-      - run:
-          name: Test
-          command: |
-            export LOCAL="/home/circleci/.local"
-            export PATH="$LOCAL/bin:$PATH"
-            python --version
-            nosetests
+defaults: &defaultsteps
+  steps:
+    - checkout
+    - run:
+        name: Install requirements
+        command: |
+          export LOCAL="/home/circleci/.local"
+          export PATH="$LOCAL/bin:$PATH"
+          pip install -r requirements.txt --user
+    - run:
+        name: Test
+        command: |
+          export LOCAL="/home/circleci/.local"
+          export PATH="$LOCAL/bin:$PATH"
+          python --version
+          nosetests
 jobs:
   py27:
+    << *defaultsteps
     docker:
       - image: circleci/python:2.7
-    steps:
-      - installandtest
   py34:
+    << *defaultsteps
     docker:
       - image: circleci/python:3.4
-    steps:
-      - installandtest
   py35:
+    << *defaultsteps
     docker:
       - image: circleci/python:3.5
-    steps:
-      - installandtest
   py36:
+    << *defaultsteps
     docker:
       - image: circleci/python:3.6
-    steps:
-      - installandtest
   py37:
+    << *defaultsteps
     docker:
       - image: circleci/python:3.7
-    steps:
-      - installandtest
 workflows:
   version: 2.1
   build_multiple_python:
