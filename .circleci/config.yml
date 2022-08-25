@@ -14,7 +14,7 @@ defaults: &defaultsteps
           export LOCAL="/home/circleci/.local"
           export PATH="$LOCAL/bin:$PATH"
           python --version
-          nosetests
+          pytest
   parallelism: 5
 jobs:
   py27:
