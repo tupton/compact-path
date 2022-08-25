@@ -21,23 +21,28 @@ jobs:
     <<: *defaultsteps
     docker:
       - image: cimg/python:2.7
-  py35:
-    <<: *defaultsteps
-    docker:
-      - image: cimg/python:3.5
-  py36:
-    <<: *defaultsteps
-    docker:
-      - image: cimg/python:3.6
   py37:
     <<: *defaultsteps
     docker:
       - image: cimg/python:3.7
+  py38:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.8
+  py39:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.9
+  py310:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.10
 workflows:
   version: 2.1
   build_multiple_python:
     jobs:
       - py27
-      - py35
-      - py36
       - py37
+      - py38
+      - py39
+      - py310
