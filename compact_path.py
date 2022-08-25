@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/local/bin/python3
 
 """
 Print a compacted version of the given path.
