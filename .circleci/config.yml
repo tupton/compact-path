@@ -19,23 +19,23 @@ jobs:
   py27:
     <<: *defaultsteps
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:2.7
   py34:
     <<: *defaultsteps
     docker:
-      - image: circleci/python:3.4
+      - image: cimg/python:3.4
   py35:
     <<: *defaultsteps
     docker:
-      - image: circleci/python:3.5
+      - image: cimg/python:3.5
   py36:
     <<: *defaultsteps
     docker:
-      - image: circleci/python:3.6
+      - image: cimg/python:3.6
   py37:
     <<: *defaultsteps
     docker:
-      - image: circleci/python:3.7
+      - image: cimg/python:3.7
 workflows:
   version: 2.1
   build_multiple_python:
