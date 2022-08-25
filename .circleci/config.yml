@@ -15,6 +15,7 @@ defaults: &defaultsteps
           export PATH="$LOCAL/bin:$PATH"
           python --version
           nosetests
+  parallelism: 5
 jobs:
   py27:
     <<: *defaultsteps
