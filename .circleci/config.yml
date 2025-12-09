@@ -4,45 +4,40 @@ defaults: &defaultsteps
     - checkout
     - run:
         name: Install requirements
-        command: |
-          export LOCAL="/home/circleci/.local"
-          export PATH="$LOCAL/bin:$PATH"
-          pip install -r requirements.txt --user
+        command: uv sync
     - run:
         name: Test
         command: |
-          export LOCAL="/home/circleci/.local"
-          export PATH="$LOCAL/bin:$PATH"
           python --version
           pytest
   parallelism: 5
 jobs:
-  py27:
-    <<: *defaultsteps
-    docker:
-      - image: cimg/python:2.7
-  py37:
-    <<: *defaultsteps
-    docker:
-      - image: cimg/python:3.7
-  py38:
-    <<: *defaultsteps
-    docker:
-      - image: cimg/python:3.8
-  py39:
-    <<: *defaultsteps
-    docker:
-      - image: cimg/python:3.9
   py310:
     <<: *defaultsteps
     docker:
       - image: cimg/python:3.10
+  py311:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.11
+  py312:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.12
+  py313:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.13
+  py314:
+    <<: *defaultsteps
+    docker:
+      - image: cimg/python:3.14
 workflows:
   version: 2.1
   build_multiple_python:
     jobs:
-      - py27
-      - py37
-      - py38
-      - py39
       - py310
+      - py311
+      - py312
+      - py313
+      - py314
