@@ -43,7 +43,7 @@ def compact_path(path: str, trigger: int = 0) -> str:
 
 
 def main() -> None:
-    args = docopt(__doc__, version="Compact Path 0.1")
+    args = docopt(__doc__, version="Compact Path 0.2")
     path = args["PATH"]
     if not path:
         return
