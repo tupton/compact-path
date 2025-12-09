@@ -1,56 +1,102 @@
+import pytest
+
 from .cli import compact_path
 
 
-def test_empty():
-    assert "" == compact_path("")
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("", ""),
+    ],
+)
+def test_empty(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
 
-def test_root():
-    assert "/" == compact_path("/")
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("/", "/"),
+    ],
+)
+def test_root(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
 
-def test_absolute():
-    assert "/usr" == compact_path("/usr")
-
-    assert "/u/local" == compact_path("/usr/local")
-
-    assert "/u/l/bin" == compact_path("/usr/local/bin")
-
-
-def test_relative():
-    assert "usr" == compact_path("usr")
-
-    assert "u/local" == compact_path("usr/local")
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("/usr", "/usr"),
+        ("/usr/local", "/u/local"),
+        ("/usr/local/bin", "/u/l/bin"),
+    ],
+)
+def test_absolute(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
 
-def test_home():
-    assert "~" == compact_path("~")
-
-    assert "~/code" == compact_path("~/code")
-
-    assert "~/c/compact_path" == compact_path("~/code/compact_path")
-
-
-def test_max_length():
-    path = "/usr/local/bin"
-    assert path == compact_path(path, len(path))
-
-    assert "/u/l/bin" == compact_path(path, trigger=1)
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("usr", "usr"),
+        ("usr/local", "u/local"),
+    ],
+)
+def test_relative(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
 
-def test_trailing_slash():
-    assert "/u/l/bin" == compact_path("/usr/local/bin/")
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("~", "~"),
+        ("~/code", "~/code"),
+        ("~/code/compact_path", "~/c/compact_path"),
+    ],
+)
+def test_home(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
 
-def test_spaces():
-    assert "/u/l/b in" == compact_path("/usr/lo cal/b in")
+@pytest.mark.parametrize(
+    "input_path,trigger,expected",
+    [
+        ("/usr/local/bin", len("/usr/local/bin"), "/usr/local/bin"),
+        ("/usr/local/bin", 1, "/u/l/bin"),
+    ],
+)
+def test_max_length(input_path: str, trigger: int, expected: str) -> None:
+    assert expected == compact_path(input_path, trigger=trigger)
 
-    assert "/u/l/b in" == compact_path("/usr/ lo cal/b in")
 
-    assert "/u/l/ bin" == compact_path("/usr/ lo cal/ bin")
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("/usr/local/bin/", "/u/l/bin"),
+    ],
+)
+def test_trailing_slash(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
 
-def test_dots():
-    assert "/.c/.p/file.txt" == compact_path("/.config/.profile/file.txt")
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("/usr/lo cal/b in", "/u/l/b in"),
+        ("/usr/ lo cal/b in", "/u/l/b in"),
+        ("/usr/ lo cal/ bin", "/u/l/ bin"),
+    ],
+)
+def test_spaces(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
 
-    assert "~/./c/./compact_path" == compact_path("~/./code/./compact_path")
+
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("/.config/.profile/file.txt", "/.c/.p/file.txt"),
+        ("~/./code/./compact_path", "~/./c/./compact_path"),
+    ],
+)
+def test_dots(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path)
