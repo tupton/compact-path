@@ -17,26 +17,23 @@ Options:
     -t, --trigger=LENGTH   The path length at which path compaction takes place [default: 0]
 """
 
-from __future__ import print_function
-
 import os
 
 from docopt import docopt
 
-def compact_path(path, trigger=0):
-    if not path or len(path) == 0 or len(path) <= trigger or path == os.sep:
+
+def compact_path(path: str, trigger: int = 0) -> str:
+    if not path or len(path) <= trigger or path == os.sep:
         return path
 
     # Filter out empty path components
-    parts = list(filter(bool, path.split(os.sep)))
+    parts = [p for p in path.split(os.sep) if p]
     # ... but add one to the beginning if we're dealing with an absolute path
-    if path[0] == os.sep:
-        parts.insert(0, '')
+    if os.path.isabs(path):
+        parts.insert(0, "")
 
     # Use the first character of each nonzero-length path component
-    compacted_parts = [(p.strip()[0] if len(p.strip()) > 0 else '') for p in parts[:-1]]
-    # Add the full "basename" (last part) of the path
-    compacted_parts.append(parts[-1])
+    compacted_parts = [p.strip()[:1] for p in parts[:-1]] + [parts[-1]]
 
     # Join the path back up with the proper separator
     # This strips trailing slashes from the input path
@@ -44,7 +41,15 @@ def compact_path(path, trigger=0):
 
     return compacted
 
-if __name__ == "__main__":
-    args = docopt(__doc__, version="Compact Path 0.1")
 
-    print(compact_path(args['PATH'], trigger=int(args['--trigger'])))
+def main() -> None:
+    args = docopt(__doc__, version="Compact Path 0.1")
+    path = args["PATH"]
+    if not path:
+        return
+
+    print(compact_path(path, trigger=int(args["--trigger"])))
+
+
+if __name__ == "__main__":
+    main()
