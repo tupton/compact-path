@@ -33,7 +33,10 @@ def compact_path(path: str, trigger: int = 0) -> str:
         parts.insert(0, "")
 
     # Use the first character of each nonzero-length path component
-    compacted_parts = [p.strip()[:1] for p in parts[:-1]] + [parts[-1]]
+    compacted_parts = [
+        p.strip()[:2] if len(p.strip()) > 0 and p.strip()[0] == "." else p.strip()[:1]
+        for p in parts[:-1]
+    ] + [parts[-1]]
 
     # Join the path back up with the proper separator
     # This strips trailing slashes from the input path

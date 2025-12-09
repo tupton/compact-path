@@ -48,3 +48,9 @@ def test_spaces():
     assert "/u/l/b in" == compact_path("/usr/ lo cal/b in")
 
     assert "/u/l/ bin" == compact_path("/usr/ lo cal/ bin")
+
+
+def test_dots():
+    assert "/.c/.p/file.txt" == compact_path("/.config/.profile/file.txt")
+
+    assert "~/./c/./compact_path" == compact_path("~/./code/./compact_path")
