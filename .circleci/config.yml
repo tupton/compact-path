@@ -8,8 +8,8 @@ defaults: &defaultsteps
     - run:
         name: Test
         command: |
-          python --version
-          pytest
+          uv run python --version
+          uv run pytest
   parallelism: 5
 jobs:
   py310:
