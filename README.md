@@ -25,6 +25,18 @@ take place. Any paths that are *less* than this length will not be compacted.
 /U/t/c/compact_path
 ```
 
+## Installation
+
+`compact-path` is not published to any package index. Install from a repository checkout with `uv tool install`.
+
+```sh
+gh repo clone tupton/compact-path # or clone with git
+cd compact-path
+uv tool install .
+```
+
+## Prompt integration
+
 You can use this in your shell prompt.
 
 ``` sh
