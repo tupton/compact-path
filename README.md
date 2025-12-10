@@ -1,15 +1,15 @@
 # Compact Path
 
-[![CircleCI Build Status](https://circleci.com/gh/tupton/compact-path/tree/master.svg?style=svg)](https://circleci.com/gh/tupton/compact-path/tree/master)
+[![CircleCI Build Status](https://circleci.com/gh/tupton/compact-path/tree/main.svg?style=svg)](https://circleci.com/gh/tupton/compact-path/tree/main)
 
 Reduce path elements to one character save the last element, like vim buffer names.
 
 ``` sh
 ❯ pwd
 /Users/tupton/code/compact_path
-❯ python compact_path.py $(pwd)
+❯ compact-path $(pwd)
 /U/t/c/compact_path
-❯ python compact_path.py $(pwd | sed "s:$HOME:~:")
+❯ compact-path $(pwd | sed "s:$HOME:~:")
 ~/c/compact_path
 ```
 
@@ -19,25 +19,24 @@ take place. Any paths that are *less* than this length will not be compacted.
 ``` sh
 ❯ pwd
 /Users/tupton/code/compact_path
-❯ python compact_path.py $(pwd) --trigger 35
+❯ compact-path $(pwd) --trigger 35
 /Users/tupton/code/compact_path
-❯ python compact_path.py $(pwd) -t 10
+❯ compact-path $(pwd) -t 10
 /U/t/c/compact_path
 ```
 
 You can use this in your shell prompt.
 
 ``` sh
-function compact_path() {
-    local cp="/usr/local/bin/compact_path"
-    if [[ -e "$cp" ]]; then
-        echo $("$cp" "$1" --trigger 20)
+function __compact_path() {
+    if hash compact-path 2>/dev/null; then
+        compact-path --trigger=20 "${PWD/#$HOME/~}"
     else
-        echo "$1"
+        echo "%~"
     fi
 }
 
-PROMPT='$(compact_path "${PWD/#$HOME/~}") %# '
+PROMPT='$(__compact_path) %# '
 ```
 
 In `zsh`, that would result in a prompt that looks like the following.
