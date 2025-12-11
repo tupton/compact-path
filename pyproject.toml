@@ -5,7 +5,7 @@ description = "Compact path elements down to a single character"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-        "docopt==0.6.2"
+        "docopt>=0.6.2",
 ]
 [tool.uv]
 package = true

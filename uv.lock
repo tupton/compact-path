@@ -25,7 +25,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "docopt", specifier = "==0.6.2" }]
+requires-dist = [{ name = "docopt", specifier = ">=0.6.2" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=9.0.2" }]
