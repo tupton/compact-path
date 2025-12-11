@@ -17,14 +17,18 @@ version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "docopt" },
+]
+
+[package.dev-dependencies]
+dev = [
     { name = "pytest" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "docopt", specifier = "==0.6.2" },
-    { name = "pytest", specifier = "==9.0.2" },
-]
+requires-dist = [{ name = "docopt", specifier = "==0.6.2" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=9.0.2" }]
 
 [[package]]
 name = "docopt"

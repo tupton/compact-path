@@ -5,10 +5,14 @@ description = "Compact path elements down to a single character"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-        "pytest==9.0.2",
         "docopt==0.6.2"
 ]
 [tool.uv]
 package = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
 [project.scripts]
 compact-path = "compact_path.cli:main"
