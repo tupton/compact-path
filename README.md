@@ -9,7 +9,7 @@ Reduce path elements to one character save the last element, like vim buffer nam
 /Users/tupton/code/compact_path
 ❯ compact-path $(pwd)
 /U/t/c/compact_path
-❯ compact-path $(pwd | sed "s:$HOME:~:")
+❯ compact-path "${PWD/#$HOME/~}"
 ~/c/compact_path
 ```
 
@@ -59,7 +59,7 @@ In `zsh`, that would result in a prompt that looks like the following.
 ~/code/compact_path %
 ```
 
-See my `zshrc` for the actual [`compact_path` function][cp] and how I use it [in my prompt][p].
+See my `zshrc` for the actual [`__compact_path` function][cp] and how I use it [in my prompt][p].
 
-  [cp]: https://github.com/tupton/dotfiles/blob/656350a5a060ec5cf162fe02f6c8f3e3cdebf3d4/zsh/zshrc.d/prompt.zsh#L18-L25
-  [p]: https://github.com/tupton/dotfiles/blob/656350a5a060ec5cf162fe02f6c8f3e3cdebf3d4/zsh/zshrc.d/prompt.zsh#L101
+  [cp]: https://github.com/tupton/dotfiles/blob/72661925418a364b08e9de7c2ddcb14a73b3eb16/zsh/zshrc.d/prompt.zsh#L18-L25
+  [p]: https://github.com/tupton/dotfiles/blob/72661925418a364b08e9de7c2ddcb14a73b3eb16/zsh/zshrc.d/prompt.zsh#L101
