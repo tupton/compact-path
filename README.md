@@ -2,15 +2,15 @@
 
 [![CircleCI Build Status](https://circleci.com/gh/tupton/compact-path/tree/main.svg?style=svg)](https://circleci.com/gh/tupton/compact-path/tree/main)
 
-Reduce path elements to one character save the last element, like vim buffer names.
+Reduce path elements to one character save the last element. Useful for space-constrained places where you still want path info, like a prompt or vim buffer names in the status line.
 
 ``` sh
 ❯ pwd
-/Users/tupton/code/compact_path
+/Users/tupton/code/compact-path
 ❯ compact-path $(pwd)
-/U/t/c/compact_path
+/U/t/c/compact-path
 ❯ compact-path "${PWD/#$HOME/~}"
-~/c/compact_path
+~/c/compact-path
 ```
 
 Pass the `--trigger` or `-t` option to specify the length at which compaction will
@@ -18,11 +18,11 @@ take place. Any paths that are *less* than this length will not be compacted.
 
 ``` sh
 ❯ pwd
-/Users/tupton/code/compact_path
+/Users/tupton/code/compact-path
 ❯ compact-path $(pwd) --trigger 35
-/Users/tupton/code/compact_path
+/Users/tupton/code/compact-path
 ❯ compact-path $(pwd) -t 10
-/U/t/c/compact_path
+/U/t/c/compact-path
 ```
 
 ## Installation
@@ -30,14 +30,14 @@ take place. Any paths that are *less* than this length will not be compacted.
 `compact-path` is not published to any package index. Install from a repository checkout with `uv tool install`.
 
 ```sh
-gh repo clone tupton/compact-path # or clone with git
+gh repo clone tupton/compact-path # or clone with git over ssh
 cd compact-path
 uv tool install .
 ```
 
 ## Prompt integration
 
-You can use this in your shell prompt.
+You can use `compact-path` in your shell prompt.
 
 ``` sh
 function __compact_path() {
@@ -54,9 +54,9 @@ PROMPT='$(__compact_path) %# '
 In `zsh`, that would result in a prompt that looks like the following.
 
 ``` sh
-~/code/compact_path % cd /usr/local/Library/Homebrew/
-/u/l/L/Homebrew % cd ~/code/compact_path
-~/code/compact_path %
+~/code/compact-path % cd /usr/local/Library/Homebrew/
+/u/l/L/Homebrew % cd ~/code/compact-path
+~/code/compact-path %
 ```
 
 See my `zshrc` for the actual [`__compact_path` function][cp] and how I use it [in my prompt][p].
