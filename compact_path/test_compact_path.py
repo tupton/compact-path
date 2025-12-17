@@ -1,6 +1,6 @@
 import pytest
 
-from .cli import compact_path
+from .compact_path import compact_path
 
 
 @pytest.mark.parametrize(
