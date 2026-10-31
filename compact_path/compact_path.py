@@ -1,6 +1,6 @@
 import os
 
-def compact_path(path: str, trigger: int = 0) -> str:
+def compact_path(path: str, trigger: int = 0, dot_exception: bool = True) -> str:
     if not path or len(path) <= trigger or path == os.sep:
         return path
 
@@ -12,7 +12,9 @@ def compact_path(path: str, trigger: int = 0) -> str:
 
     # Use the first character of each nonzero-length path component
     compacted_parts = [
-        p.strip()[:2] if len(p.strip()) > 0 and p.strip()[0] == "." else p.strip()[:1]
+        p.strip()[:2]
+        if dot_exception and len(p.strip()) > 0 and p.strip()[0] == "."
+        else p.strip()[:1]
         for p in parts[:-1]
     ] + [parts[-1]]
 

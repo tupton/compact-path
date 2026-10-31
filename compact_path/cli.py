@@ -4,7 +4,7 @@
 Print a compacted version of the given path.
 
 Usage:
-    compact_path.py [--trigger=LENGTH] PATH
+    compact_path.py [--trigger=LENGTH] [--no-dot] PATH
     compact_path.py (-h | --help)
     compact_path.py --version
 
@@ -15,6 +15,7 @@ when the path exceeds a given trigger length.
 
 Options:
     -t, --trigger=LENGTH   The path length at which path compaction takes place [default: 0]
+    -n, --no-dot           Disable the dot exception (use 1 char for dotfiles)
 """
 
 from docopt import docopt
@@ -28,7 +29,13 @@ def main() -> None:
     if not path:
         return
 
-    print(compact_path(path, trigger=int(args["--trigger"])))
+    print(
+        compact_path(
+            path,
+            trigger=int(args["--trigger"]),
+            dot_exception=not args["--no-dot"],
+        )
+    )
 
 
 if __name__ == "__main__":

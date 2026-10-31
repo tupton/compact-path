@@ -100,3 +100,13 @@ def test_spaces(input_path: str, expected: str) -> None:
 )
 def test_dots(input_path: str, expected: str) -> None:
     assert expected == compact_path(input_path)
+
+
+@pytest.mark.parametrize(
+    "input_path,expected",
+    [
+        ("/.config/.profile/file.txt", "/././file.txt"),
+    ],
+)
+def test_dots_disabled(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path, dot_exception=False)
