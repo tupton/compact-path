@@ -16,7 +16,8 @@ when the path exceeds a given trigger length.
 Options:
     -t, --trigger=LENGTH   The path length at which path compaction takes place [default: 0]
     -n, --no-dot           Disable the dot exception (use 1 char for dotfiles)
-    --truncate             Truncate the path to the trigger length (default: False)
+    --truncate             Truncate the basename with an ellipsis. Preserves the compacted path
+                           prefix and at least one basename character.
 """
 
 from docopt import docopt

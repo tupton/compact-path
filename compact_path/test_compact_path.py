@@ -115,15 +115,14 @@ def test_dots_disabled(input_path: str, expected: str) -> None:
 @pytest.mark.parametrize(
     "input_path,trigger,expected",
     [
-        ("/usr/local/bin", 5, "/u/l/b…"),
-        ("/usr/local/bin", 6, "/u/l/…"),
-        ("/usr/local/bin", 10, "/u/l/bin"),
+        ("/usr/local/bin", 6, "/u/l/b…"),
         ("/usr/local/bin", 7, "/u/l/b…"),
         ("/usr/local/bin", 8, "/u/l/bin"),
+        ("/usr/local/bin", 10, "/u/l/bin"),
         ("a/longname", 5, "a/lo…"),
         ("/longname", 5, "/lon…"),
         ("longname", 5, "long…"),
-        ("longname", 1, "…"),
+        ("longname", 1, "l…"),
         (
             "/really/long/path/with/even/longer/basename-with-a-long-long-long-tail",
             20,
@@ -138,17 +137,18 @@ def test_truncate(input_path: str, trigger: int, expected: str) -> None:
 @pytest.mark.parametrize(
     "input_path,trigger",
     [
-        ("/usr/local/bin", 6),
         ("/usr/local/bin", 7),
         ("a/longname", 5),
         ("/longname", 5),
         ("longname", 5),
-        ("longname", 1),
+        ("longname", 2),
         (
             "/really/long/path/with/even/longer/basename-with-a-long-long-long-tail",
             20,
         ),
     ],
 )
-def test_truncate_fits_when_prefix_and_ellipsis_fit(input_path: str, trigger: int) -> None:
+def test_truncate_fits_when_prefix_and_ellipsis_fit(
+    input_path: str, trigger: int
+) -> None:
     assert len(compact_path(input_path, trigger=trigger, truncate=True)) <= trigger
