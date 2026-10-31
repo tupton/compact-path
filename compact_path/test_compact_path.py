@@ -108,8 +108,8 @@ def test_dots(input_path: str, expected: str) -> None:
         ("/.config/.profile/file.txt", "/././file.txt"),
     ],
 )
-def test_dots_disabled(input_path: str, expected: str) -> None:
-    assert expected == compact_path(input_path, dot_exception=False)
+def test_single_char(input_path: str, expected: str) -> None:
+    assert expected == compact_path(input_path, single_char=True)
 
 
 @pytest.mark.parametrize(

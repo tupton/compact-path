@@ -4,18 +4,21 @@
 Print a compacted version of the given path.
 
 Usage:
-    compact_path.py [--trigger=LENGTH] [--no-dot] [--truncate] PATH
+    compact_path.py [--trigger=LENGTH] [--single-char] [--truncate] PATH
     compact_path.py (-h | --help)
     compact_path.py --version
 
-Long elements in a path are compacted to one letter. Optionally, path compaction can take place only
-when the path exceeds a given trigger length.
+Parent path components are compacted to one character. By default, dot-aware compaction
+retains the dot and the following character in dot-prefixed components, so '.config'
+becomes '.c' rather than just '.'. Use --single-char to enforce one character per
+compacted component. The basename (last component) is unchanged unless --truncate
+is used. Optionally, compact only when the path exceeds a given trigger length.
 
     PATH     The path to compact
 
 Options:
     -t, --trigger=LENGTH   The path length at which path compaction takes place [default: 0]
-    -n, --no-dot           Disable the dot exception (use 1 char for dotfiles)
+    --single-char          Compact each parent component to one character, including dot-prefixed names.
     --truncate             Truncate the basename with an ellipsis. Preserves the compacted path
                            prefix and at least one basename character.
 """
@@ -35,7 +38,7 @@ def main() -> None:
         compact_path(
             path,
             trigger=int(args["--trigger"]),
-            dot_exception=not args["--no-dot"],
+            single_char=args["--single-char"],
             truncate=args["--truncate"],
         )
     )

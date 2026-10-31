@@ -13,6 +13,18 @@ Reduce path elements to one character save the last element. Useful for space-co
 ~/c/compact-path
 ```
 
+By default, **dot-aware compaction** retains the dot and the following character
+in dot-prefixed components, so `.config` becomes `.c` rather than just `.`. Use
+`--single-char` to enforce one character per compacted component. The
+basename (last component) remains unchanged unless `--truncate` is used.
+
+```sh
+❯ compact-path /home/.config/app
+/h/.c/app
+❯ compact-path --single-char /home/.config/app
+/h/./app
+```
+
 Pass the `--trigger` or `-t` option to specify the length at which compaction will
 take place. Any paths that are *less* than this length will not be compacted.
 
